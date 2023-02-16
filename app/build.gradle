@@ -51,7 +51,7 @@ configurations.configureEach {
     resolutionStrategy.eachDependency {
         if (requested.group == "org.checkerframework" && requested.name != "checker-compat-qual") {
             useVersion(checkerVersion)
-            because("https://github.com/google/ExoPlayer/issues/10007")
+            because("hthttpshttpshttpshttpshttpstps://github.com/google/ExoPlayer/issues/10007")
         }
     }
 }
@@ -128,29 +128,29 @@ android {
         productFlavors {
             // used for f-droid
             generic {
-                applicationId 'com.nextcloud.client'
+                applicationId 'de.ikgp.kantiversum'
                 dimension "default"
             }
 
             gplay {
-                applicationId 'com.nextcloud.client'
+                applicationId 'de.ikgp.kantiversum'
                 dimension "default"
             }
 
             huawei {
-                applicationId 'com.nextcloud.client'
+                applicationId 'de.ikgp.kantiversum'
                 dimension "default"
             }
 
             versionDev {
-                applicationId "com.nextcloud.android.beta"
+                applicationId "de.ikgp.kantiversum.testr"
                 dimension "default"
                 versionCode 20220322
                 versionName "20220322"
             }
 
             qa {
-                applicationId "com.nextcloud.android.qa"
+                applicationId "de.ikgp.kantiversum.testr"
                 dimension "default"
                 versionCode 1
                 versionName "1"
