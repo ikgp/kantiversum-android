@@ -51,7 +51,7 @@ configurations.configureEach {
     resolutionStrategy.eachDependency {
         if (requested.group == "org.checkerframework" && requested.name != "checker-compat-qual") {
             useVersion(checkerVersion)
-            because("hthttpshttpshttpshttpshttpstps://github.com/google/ExoPlayer/issues/10007")
+            because("https://github.com/google/ExoPlayer/issues/10007")
         }
     }
 }
