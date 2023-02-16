@@ -1,8 +1,9 @@
 name: "QA"
 
 on:
-    pull_request:
-        branches: [ master, stable-* ]
+    push:
+        branches:
+            - master
 
 permissions:
     pull-requests: write
