@@ -51,7 +51,7 @@
 
     <!-- Multiaccount support -->
     <!-- Probably not used by anyone in Kantiversum except F. Krämer, but he uses iOS -->
-    <bool name="multiaccount_support">true</bool>
+    <bool name="multiaccount_support">false</bool>
 
     <!-- Drawer options -->
     <bool name="recently_modified_enabled">true</bool>
