@@ -12,9 +12,6 @@ jobs:
     qa:
         runs-on: ubuntu-latest
         steps:
-            -   name: Check if secrets are available
-                run: echo "::set-output name=ok::${{ secrets.KS_PASS != '' }}"
-                id: check-secrets
             -   uses: actions/checkout@755da8c3cf115ac066823e79a1e1788f8940201b # v3
                 if: ${{ steps.check-secrets.outputs.ok == 'true' }}
             -   name: set up JDK 11
@@ -30,17 +27,15 @@ jobs:
                     /usr/local/lib/android/sdk/tools/bin/sdkmanager "ndk;${NDK_VERSION}" "cmake;${CMAKE_VERSION}"
             -   name: Build QA
                 if: ${{ steps.check-secrets.outputs.ok == 'true' }}
-                env:
-                    KS_PASS: ${{ secrets.KS_PASS }}
-                    KEY_PASS: ${{ secrets.KEY_PASS }}
-                    LOG_USERNAME: ${{ secrets.LOG_USERNAME }}
-                    LOG_PASSWORD: ${{ secrets.LOG_PASSWORD }}
-                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                 run: |
                     mkdir -p $HOME/.gradle
                     echo "org.gradle.jvmargs=-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError" > $HOME/.gradle/gradle.properties
                     sed -i "/qa/,/\}/ s/versionCode .*/versionCode ${{github.event.number}} /" app/build.gradle
                     sed -i "/qa/,/\}/ s/versionName .*/versionName \"${{github.event.number}}\"/" app/build.gradle
                     ./gradlew assembleQaDebug
-                    $(find /usr/local/lib/android/sdk/build-tools/*/apksigner | sort | tail -n1) sign  --ks-pass pass:$KS_PASS --key-pass pass:$KEY_PASS --ks-key-alias key0 --ks scripts/QA_keystore.jks app/build/outputs/apk/qa/debug/qa-debug-*.apk
-                    scripts/uploadArtifact.sh $LOG_USERNAME $LOG_PASSWORD ${{github.event.number}} ${{github.event.number}}
+
+            - name: Upload APK
+              uses: actions/upload-artifact@v2
+              with:
+                  name: qa-debug-${{github.event.number}}
+                  path: app/build/outputs/apk/qa/debug/qa-debug-*.apk
