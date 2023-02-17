@@ -22,8 +22,8 @@
 
     <!-- URLs and flags related -->
     <bool name="show_server_url_input">false</bool>
-    <bool name="show_provider_or_own_installation">false</bool>
-    <string name="provider_registration_server">https://cloud-kant.stadt-pirmasens.de/</string>
+    <bool name="show_provider_or_own_installation">true</bool>
+    <string name="provider_registration_server">https://cloud-kant.stadt-pirmasens.de/register</string>
 
     <!-- Flags to enable/disable some features -->
     <string name="send_files_to_other_apps">on</string>
